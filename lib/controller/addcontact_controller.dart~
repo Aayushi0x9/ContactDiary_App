@@ -4,7 +4,9 @@ import 'package:flutter/cupertino.dart';
 class AddcontactController extends ChangeNotifier {
   String? path;
 
-  final List<Contact> _contacts = [];
+  final List<Contact> _contacts = [
+    
+  ];
   List<Contact> get contacts => _contacts;
 
   int selectedIndex = 0;
