@@ -1,11 +1,13 @@
+import 'package:contact_dairy_app/new%20purvi/home_contact/homecontact.dart';
+import 'package:contact_dairy_app/presentations/hide/hide_screen.dart';
 import 'package:contact_dairy_app/presentations/screens/add_contact_page/add_contact_page.dart';
 import 'package:contact_dairy_app/presentations/screens/counter/counter_screen.dart';
 import 'package:contact_dairy_app/presentations/screens/details/details_screen.dart';
 import 'package:contact_dairy_app/presentations/screens/home/home_screen.dart';
 import 'package:contact_dairy_app/presentations/screens/intro/intro_screen.dart';
 import 'package:contact_dairy_app/presentations/screens/splash/splash_screen.dart';
-import 'package:contact_dairy_app/start/login/login_screen.dart';
-import 'package:contact_dairy_app/start/signup/signup_screen.dart';
+import 'package:contact_dairy_app/presentations/start/login/login_screen.dart';
+import 'package:contact_dairy_app/presentations/start/signup/signup_screen.dart';
 import 'package:flutter/cupertino.dart';
 
 class AppRoutes {
@@ -17,6 +19,8 @@ class AppRoutes {
   static String counterPage = 'counter_page';
   static String addContactPage = 'add_contact_page';
   static String detailsPage = 'details_page';
+  static String hidePage = 'hide_page';
+  static String homecontact = 'homecontact';
 
   static Map<String, WidgetBuilder> routes = {
     AppRoutes.splashscreen: (context) => const SplashScreen(),
@@ -26,6 +30,8 @@ class AppRoutes {
     AppRoutes.homepage: (context) => const HomeScreen(),
     AppRoutes.counterPage: (context) => const CounterPage(),
     AppRoutes.addContactPage: (context) => const AddContactPage(),
-    detailsPage: (context) => const DetailsScreen(),
+    AppRoutes.detailsPage: (context) => const DetailsScreen(),
+    AppRoutes.hidePage: (context) => const HideScreen(),
+    homecontact: (context) => const Homecontact(),
   };
 }

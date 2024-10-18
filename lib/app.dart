@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
             color: CupertinoColors.black,
           ),
         ),
-        iconTheme: const IconThemeData(color: CupertinoColors.white),
+        iconTheme: const IconThemeData(color: CupertinoColors.black),
         fontFamily: 'SF-Pro',
       ),
       darkTheme: ThemeData(
@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        iconTheme: const IconThemeData(color: CupertinoColors.black),
+        iconTheme: const IconThemeData(color: CupertinoColors.white),
         textTheme: const TextTheme(
           headlineMedium: TextStyle(
             color: CupertinoColors.white,

@@ -16,7 +16,7 @@ void main() {
         ChangeNotifierProvider(
           create: (context) => CounterController(),
         ),
-        ChangeNotifierProvider(create: (context) => AddcontactController()),
+        ChangeNotifierProvider(create: (context) => AddContactController()),
       ],
       child: const MyApp(),
     ),

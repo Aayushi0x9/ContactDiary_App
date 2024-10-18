@@ -21,12 +21,12 @@ class _AddContactPageState extends State<AddContactPage> {
   TextEditingController numberController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController companyController = TextEditingController();
+  String imagePath = '';
   // String? path;
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.sizeOf(context);
-    AddcontactController addContactProvider =
-        Provider.of<AddcontactController>(context);
+    AddContactController addContactProvider =
+        Provider.of<AddContactController>(context);
     return Scaffold(
       appBar: AppBar(
         leading: TextButton(
@@ -59,7 +59,7 @@ class _AddContactPageState extends State<AddContactPage> {
                 number: numberController.text,
                 email: emailController.text,
                 company: companyController.text,
-                imagePath: addContactProvider.path,
+                imagePath: imagePath,
               ));
               Navigator.pop(context);
             },
@@ -67,7 +67,6 @@ class _AddContactPageState extends State<AddContactPage> {
             child: const Text(
               'Save',
               style: TextStyle(
-                // fontWeight: FontWeight.bold,
                 color: CupertinoColors.activeBlue,
               ),
             ),
@@ -83,13 +82,12 @@ class _AddContactPageState extends State<AddContactPage> {
               Stack(
                 alignment: Alignment.bottomRight,
                 children: [
-                  addContactProvider.path == null
+                  imagePath == null
                       ? const CircleAvatar(
                           radius: 60,
                         )
                       : CircleAvatar(
-                          foregroundImage:
-                              FileImage(File(addContactProvider.path!)),
+                          foregroundImage: FileImage(File(imagePath!)),
                           radius: 60,
                         ),
                   FloatingActionButton.small(
@@ -98,8 +96,8 @@ class _AddContactPageState extends State<AddContactPage> {
                       XFile? image =
                           await picker.pickImage(source: ImageSource.gallery);
                       if (image != null) {
-                        addContactProvider.path =
-                            image.path; // Update the image path in provider
+                        imagePath = image.path;
+                        setState(() {});
                       }
                     },
                     shape: RoundedRectangleBorder(
@@ -117,7 +115,7 @@ class _AddContactPageState extends State<AddContactPage> {
                   ImagePicker picker = ImagePicker();
                   XFile? image =
                       await picker.pickImage(source: ImageSource.gallery);
-                  addContactProvider.path = image!.path;
+                  imagePath = image!.path;
                 },
                 child: const Text('Edit'),
               ),
@@ -200,6 +198,13 @@ class _AddContactPageState extends State<AddContactPage> {
                 textInputAction: TextInputAction.next,
                 keyboardType: TextInputType.phone,
                 controller: numberController,
+                validator: (val) {
+                  if (numberController.text.length != 10) {
+                    return 'Please enter a valid number';
+                  }
+                  return null;
+                },
+                maxLength: 10,
                 decoration: const InputDecoration(
                   filled: true,
                   suffixIcon: Icon(Icons.phone),
@@ -227,6 +232,17 @@ class _AddContactPageState extends State<AddContactPage> {
                 textInputAction: TextInputAction.next,
                 keyboardType: TextInputType.emailAddress,
                 controller: emailController,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your email';
+                  } else {
+                    RegExp(r'''[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?''')
+                            .hasMatch(value)
+                        ? null
+                        : 'Invalid Email';
+                  }
+                  return null;
+                },
                 decoration: const InputDecoration(
                   filled: true,
                   suffixIcon: Icon(Icons.email),

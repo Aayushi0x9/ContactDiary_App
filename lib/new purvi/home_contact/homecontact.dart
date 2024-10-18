@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:contact_dairy_app/controller/addcontact_controller.dart';
+import 'package:contact_dairy_app/controller/addContact_controller.dart';
 import 'package:contact_dairy_app/model/contact_model.dart';
 import 'package:contact_dairy_app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
@@ -8,14 +8,14 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class Homecontact extends StatefulWidget {
+  const Homecontact({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<Homecontact> createState() => _HomecontactState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomecontactState extends State<Homecontact> {
   @override
   Widget build(BuildContext context) {
     AddContactController contactProvider =
@@ -23,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: Icon(Icons.menu),
-        title: Text('Contact Diary'),
+        title: Text('Contact App'),
         actions: [
           IconButton(
             onPressed: () {
