@@ -1,7 +1,8 @@
 import 'package:contact_dairy_app/model/contact_model.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:local_auth/local_auth.dart';
 
-class AddContactController extends ChangeNotifier {
+class ContactController extends ChangeNotifier {
   final List<Contact> _contacts = [
     Contact(
       ftname: 'asajfnckj',
@@ -14,14 +15,29 @@ class AddContactController extends ChangeNotifier {
 
   int selectedIndex = 0;
 
-  // void setPath(int index) {
-  //   path = _contacts[index].imagePath;
-  //   notifyListeners();
-  // }
-
   void setSelectedIndex(int index) {
     selectedIndex = index;
     notifyListeners();
+  }
+
+  Future<bool> openLock({required context}) async {
+    LocalAuthentication auth = LocalAuthentication();
+    bool isBioActivate = await auth.canCheckBiometrics;
+    bool isDeviceSupport = await auth.isDeviceSupported();
+
+    if (isDeviceSupport && isBioActivate) {
+      List<BiometricType> availableBio = await auth.getAvailableBiometrics();
+      if (availableBio.isEmpty) {
+        return false;
+      } else {
+        bool authenticated = await auth.authenticate(
+          localizedReason: 'Please authenticate to view contacts',
+        );
+        return true;
+      }
+    } else {
+      return true;
+    }
   }
 
   void removeContact(Contact contact) {

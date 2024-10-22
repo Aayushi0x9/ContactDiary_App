@@ -73,7 +73,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'SF-Pro',
       ),
       themeMode: ThemeMode.system,
-      initialRoute: AppRoutes.splashscreen,
+      initialRoute: AppRoutes.homepage,
       routes: AppRoutes.routes,
     );
   }

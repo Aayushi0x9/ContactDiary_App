@@ -1,4 +1,3 @@
-import 'package:contact_dairy_app/new%20purvi/home_contact/homecontact.dart';
 import 'package:contact_dairy_app/presentations/hide/hide_screen.dart';
 import 'package:contact_dairy_app/presentations/screens/add_contact_page/add_contact_page.dart';
 import 'package:contact_dairy_app/presentations/screens/counter/counter_screen.dart';
@@ -20,7 +19,6 @@ class AppRoutes {
   static String addContactPage = 'add_contact_page';
   static String detailsPage = 'details_page';
   static String hidePage = 'hide_page';
-  static String homecontact = 'homecontact';
 
   static Map<String, WidgetBuilder> routes = {
     AppRoutes.splashscreen: (context) => const SplashScreen(),
@@ -32,6 +30,5 @@ class AppRoutes {
     AppRoutes.addContactPage: (context) => const AddContactPage(),
     AppRoutes.detailsPage: (context) => const DetailsScreen(),
     AppRoutes.hidePage: (context) => const HideScreen(),
-    homecontact: (context) => const Homecontact(),
   };
 }

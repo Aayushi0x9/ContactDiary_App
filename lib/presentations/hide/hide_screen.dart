@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:contact_dairy_app/controller/addContact_controller.dart';
+import 'package:contact_dairy_app/controller/contact_controller.dart';
 import 'package:contact_dairy_app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,8 +15,9 @@ class HideScreen extends StatefulWidget {
 class _HideScreenState extends State<HideScreen> {
   @override
   Widget build(BuildContext context) {
-    AddContactController hideController =
-        Provider.of<AddContactController>(context);
+    ContactController hideController = Provider.of<ContactController>(context);
+    // AddContactController hideController =
+    //     ModalRoute.of(context)!.settings.arguments as AddContactController;
     return Scaffold(
       appBar: AppBar(
         title: Text('Hide Contacts'),
@@ -24,27 +25,29 @@ class _HideScreenState extends State<HideScreen> {
       body: (hideController.hideList.isNotEmpty)
           ? ListView.separated(
               itemBuilder: (context, index) => ListTile(
-                  onTap: () {
-                    Navigator.pushNamed(context, AppRoutes.detailsPage,
-                        arguments: hideController.hideList[index]);
-                  },
-                  leading: hideController.hideList[index].imagePath == null
-                      ? CircleAvatar(
-                          child: Text(hideController.hideList[index].ftname[0]),
-                        )
-                      : CircleAvatar(
-                          foregroundImage: FileImage(
-                              File(hideController.hideList[index].imagePath!)),
-                        ),
-                  title: Text(hideController.hideList[index].ftname),
-                  subtitle: Text(hideController.hideList[index].number),
-                  trailing: IconButton(
-                    onPressed: () {
-                      hideController
-                          .unHideContact(hideController.hideList[index]);
+                    onTap: () {
+                      Navigator.pushNamed(context, AppRoutes.detailsPage,
+                          arguments: hideController.hideList[index]);
                     },
-                    icon: Icon(Icons.restore_from_trash),
-                  )),
+                    leading: hideController.hideList[index].imagePath == null
+                        ? CircleAvatar(
+                            child:
+                                Text(hideController.hideList[index].ftname[0]),
+                          )
+                        : CircleAvatar(
+                            foregroundImage: FileImage(File(
+                                hideController.hideList[index].imagePath!)),
+                          ),
+                    title: Text(hideController.hideList[index].ftname),
+                    subtitle: Text(hideController.hideList[index].number),
+                    // trailing: IconButton(
+                    //   onPressed: () {
+                    //     hideController
+                    //         .unHideContact(hideController.hideList[index]);
+                    //   },
+                    //   icon: Icon(Icons.restore_from_trash),
+                    // ),
+                  ),
               separatorBuilder: (context, index) => Divider(),
               itemCount: hideController.hideList.length)
           : Text('No Hide contact yet.'),

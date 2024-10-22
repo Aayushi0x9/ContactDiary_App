@@ -1,10 +1,11 @@
 import 'dart:io';
 
-import 'package:contact_dairy_app/controller/addcontact_controller.dart';
+import 'package:contact_dairy_app/controller/contact_controller.dart';
 import 'package:contact_dairy_app/model/contact_model.dart';
 import 'package:contact_dairy_app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -18,23 +19,29 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    AddContactController contactProvider =
-        Provider.of<AddContactController>(context);
+    ContactController contactProvider = Provider.of<ContactController>(context);
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(Icons.menu),
-        title: Text('Contact Diary'),
+        leading: const Icon(Icons.menu),
+        title: const Text('Contact Diary'),
         actions: [
           IconButton(
-            onPressed: () {
-              Navigator.of(context).pushNamed(AppRoutes.hidePage);
+            onPressed: () async {
+              LocalAuthentication authentication = LocalAuthentication();
+              bool opened = await authentication.authenticate(
+                  localizedReason: "Open Intro");
+              if (opened) {
+                Navigator.of(context).pushNamed(
+                  AppRoutes.hidePage,
+                );
+              }
             },
-            icon: Icon(Icons.lock_outlined),
+            icon: const Icon(Icons.lock_outlined),
           ),
         ],
       ),
       body: contactProvider.contacts.isEmpty
-          ? Center(child: Text('No contacts yet'))
+          ? const Center(child: Text('No contacts yet'))
           : ListView.separated(
               itemCount: contactProvider.contacts.length,
               itemBuilder: (context, index) {
@@ -78,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Uri call = Uri(scheme: 'tel', path: contact.number);
                         await launchUrl(call);
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.call,
                         color: Colors.green,
                       ),
@@ -86,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 );
               },
-              separatorBuilder: (context, index) => Divider(),
+              separatorBuilder: (context, index) => const Divider(),
             ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
