@@ -68,7 +68,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 Navigator.pop(context);
               }
             },
-            icon: const Icon(Icons.lock_outline),
+            icon: Icon(hideController.hideList.contains(contact)
+                ? Icons.lock_open_outlined
+                : Icons.lock_outline),
           ),
         ],
       ),
@@ -92,7 +94,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   ),
             10.h,
             Text(
-              contact.ftname + ' ',
+              '${contact.ftname} ${contact.sdname}',
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 22,
@@ -156,7 +158,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         onPressed: () {
                           Share.share(contact.number);
                         },
-                        icon: Icon(Icons.share)),
+                        icon: const Icon(Icons.share)),
                     10.h,
                     const Text('Share'),
                   ],
@@ -183,10 +185,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
             10.h,
             Container(
               alignment: Alignment.topLeft,
-              padding: EdgeInsets.only(left: 20),
+              padding: const EdgeInsets.only(left: 20),
               child: Row(
                 children: [
-                  Icon(FontAwesomeIcons.whatsapp),
+                  const Icon(FontAwesomeIcons.whatsapp),
                   10.w,
                   const Text(
                     'WhatsApp',
@@ -197,17 +199,17 @@ class _DetailsScreenState extends State<DetailsScreen> {
             ),
             10.h,
             ListTile(
-              leading: SizedBox(),
+              leading: const SizedBox(),
               trailing: const Icon(FontAwesomeIcons.whatsapp),
               title: Text('Message +91 ${contact.number}'),
             ),
             ListTile(
-              leading: SizedBox(),
+              leading: const SizedBox(),
               trailing: const Icon(FontAwesomeIcons.whatsapp),
               title: Text('Voice call +91 ${contact.number}'),
             ),
             ListTile(
-              leading: SizedBox(),
+              leading: const SizedBox(),
               trailing: const Icon(FontAwesomeIcons.whatsapp),
               title: Text('Video call +91 ${contact.number}'),
             )

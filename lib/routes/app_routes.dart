@@ -1,4 +1,6 @@
 import 'package:contact_dairy_app/presentations/hide/hide_screen.dart';
+import 'package:contact_dairy_app/presentations/practice/bottomnavigationBB.dart';
+import 'package:contact_dairy_app/presentations/practice/pageview.dart';
 import 'package:contact_dairy_app/presentations/screens/add_contact_page/add_contact_page.dart';
 import 'package:contact_dairy_app/presentations/screens/counter/counter_screen.dart';
 import 'package:contact_dairy_app/presentations/screens/details/details_screen.dart';
@@ -19,6 +21,8 @@ class AppRoutes {
   static String addContactPage = 'add_contact_page';
   static String detailsPage = 'details_page';
   static String hidePage = 'hide_page';
+  static String bottomNav = 'bottom_nav';
+  static String pageView = 'page_view';
 
   static Map<String, WidgetBuilder> routes = {
     AppRoutes.splashscreen: (context) => const SplashScreen(),
@@ -30,5 +34,7 @@ class AppRoutes {
     AppRoutes.addContactPage: (context) => const AddContactPage(),
     AppRoutes.detailsPage: (context) => const DetailsScreen(),
     AppRoutes.hidePage: (context) => const HideScreen(),
+    AppRoutes.bottomNav: (context) => HomeBNB(),
+    AppRoutes.pageView: (context) => const PageviewPage(),
   };
 }
